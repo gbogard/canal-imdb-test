@@ -21,9 +21,9 @@ object Parsers {
       primaryTitle,
       originalTitle,
       isAdult,
-      startYear.toShort,
+      optional(startYear).map(_.toShort),
       optional(endYear).map(_.toShort),
-      runtimeMinutes.toShort,
+      optional(runtimeMinutes).map(_.toShort),
       genres
     )
 
@@ -38,7 +38,7 @@ object Parsers {
     } yield Person(
       id,
       primaryName,
-      birthYear.toShort,
+      optional(birthYear).map(_.toShort),
       optional(deathYear).map(_.toShort),
       primaryProfession,
       titlesIds
@@ -80,7 +80,7 @@ object Parsers {
   } yield Rating(
     titleId,
     averageRating.toFloat,
-    BigInt(numVotes)
+    numVotes.toLong
   )
 
   private def optional(field: String): Option[String] = field match {

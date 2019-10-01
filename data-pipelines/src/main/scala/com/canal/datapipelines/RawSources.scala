@@ -23,7 +23,7 @@ object RawSources {
     readFile(Files.titleRatings).via(parse(Parsers.mapToRating))
 
   private lazy val csvParser: Flow[ByteString, List[ByteString], NotUsed] =
-    CsvParsing.lineScanner(delimiter = CsvParsing.Tab)
+    CsvParsing.lineScanner(delimiter = CsvParsing.Tab, quoteChar = CsvParsing.Tab)
 
   private def readFile(fileName: String): Source[Map[String, String], Future[IOResult]] = {
     val path = Paths.get(Files.folderLocation, fileName)

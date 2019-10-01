@@ -3,7 +3,7 @@ package com.canal.domain
 case class Person(
   id: String,
   primaryName: String,
-  birthYear: Short,
+  birthYear: Option[Short],
   deathYear: Option[Short],
   primaryProfession: Vector[String],
   titlesIds: Vector[String]

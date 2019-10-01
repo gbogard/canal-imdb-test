@@ -3,7 +3,7 @@ package com.canal.domain
 case class PersonWithJob(
   id: String,
   primaryName: String,
-  birthYear: Short,
+  birthYear: Option[Short],
   deathYear: Option[Short],
   primaryProfession: Vector[String],
   category: String,
@@ -12,7 +12,7 @@ case class PersonWithJob(
 )
 
 object PersonWithJob {
-  def apply(principal: Principal, person: Person): PersonWithJob = PersonWithJob(
+  def fromPrincipalAndPerson(person: Person, principal: Principal): PersonWithJob = PersonWithJob(
     person.id,
     person.primaryName,
     person.birthYear,

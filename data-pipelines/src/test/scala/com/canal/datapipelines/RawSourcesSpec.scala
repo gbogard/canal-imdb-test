@@ -18,9 +18,9 @@ class RawSourcesSpec extends AsyncFunSpec with Matchers {
         "Carmencita",
         "Carmencita",
         false,
-        1894,
+        Some(1894),
         None,
-        1,
+        Some(1),
         Vector("Documentary", "Short")
       )
 
@@ -36,7 +36,7 @@ class RawSourcesSpec extends AsyncFunSpec with Matchers {
       val expectedPerson = Person(
         "nm0000001",
         "Fred Astaire",
-        1899,
+        Some(1899),
         Some(1987),
         Vector("soundtrack", "actor", "miscellaneous"),
         Vector("tt0053137", "tt0050419", "tt0072308", "tt0043044")

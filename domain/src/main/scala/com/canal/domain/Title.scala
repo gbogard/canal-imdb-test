@@ -6,8 +6,8 @@ case class Title(
   primaryTitle: String,
   originalTitle: String,
   isAdult: Boolean,
-  startYear: Short,
+  startYear: Option[Short],
   endYear: Option[Short],
-  runtimeMinutes: Short,
+  runtimeMinutes: Option[Short],
   genres: Vector[String]
 )

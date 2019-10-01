@@ -6,7 +6,6 @@ ThisBuild / organization     := "com.canal"
 ThisBuild / organizationName := "Canal+"
 
 ThisBuild / resolvers += Resolver.sonatypeRepo("releases")
-addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 
 lazy val root = (project in file("."))
   .settings(name := "Canal+ Test")
@@ -18,6 +17,7 @@ lazy val domain = (project in file("domain"))
 lazy val dataPipelines = (project in file("data-pipelines"))
   .settings(name := "Data pipelines")
   .settings(libraryDependencies ++= Seq(akkaStreams, alpakkaCsv, scalaTest % "test"))
+  .settings(addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3"))
   .dependsOn(domain)
 
 lazy val httpApi = (project in file("http-api"))
