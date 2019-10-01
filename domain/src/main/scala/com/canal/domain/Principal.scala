@@ -5,6 +5,6 @@ case class Principal(
   ordering: Short,
   personId: String,
   category: String,
-  job: String,
+  job: Option[String],
   characters: Option[String]
 )

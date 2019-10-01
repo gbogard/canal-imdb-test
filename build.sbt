@@ -10,18 +10,19 @@ addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 
 lazy val root = (project in file("."))
   .settings(name := "Canal+ Test")
+  .aggregate(dataPipelines, httpApi)
 
 lazy val domain = (project in file("domain"))
   .settings(name :=  "domain")
 
 lazy val dataPipelines = (project in file("data-pipelines"))
   .settings(name := "Data pipelines")
-  .settings(libraryDependencies ++= Seq(akkaStreams, alpakkaCsv))
+  .settings(libraryDependencies ++= Seq(akkaStreams, alpakkaCsv, scalaTest % "test"))
   .dependsOn(domain)
 
 lazy val httpApi = (project in file("http-api"))
   .settings(name := "Http API")
-  .settings(libraryDependencies ++= Seq(akkaStreams, akkaHttp))
+  .settings(libraryDependencies ++= Seq(akkaStreams, akkaHttp, scalaTest % "test"))
   .dependsOn(domain, dataPipelines)
 
 lazy val benchmarks = (project in file("benchmarks"))

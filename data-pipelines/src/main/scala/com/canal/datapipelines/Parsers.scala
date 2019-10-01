@@ -12,7 +12,7 @@ object Parsers {
       originalTitle <- input.get("originalTitle")
       isAdult <- input.get("isAdult").flatMap(boolean)
       startYear <- input.get("startYear")
-      endYear <- input.get("endyear")
+      endYear <- input.get("endYear")
       runtimeMinutes <- input.get("runtimeMinutes")
       genres <- input.get("genres").map(vector)
     } yield Title(
@@ -57,7 +57,7 @@ object Parsers {
       ordering.toShort,
       personId,
       category,
-      job,
+      optional(job),
       optional(characters)
     )
   
