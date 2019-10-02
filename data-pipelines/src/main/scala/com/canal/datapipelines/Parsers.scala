@@ -23,7 +23,7 @@ object Parsers {
       isAdult,
       optional(startYear).map(_.toShort),
       optional(endYear).map(_.toShort),
-      optional(runtimeMinutes).map(_.toShort),
+      optional(runtimeMinutes).map(_.toInt),
       genres
     )
 
@@ -69,8 +69,8 @@ object Parsers {
   } yield Episode(
     titleId,
     parentTitleId,
-    seasonNumber.toShort,
-    episodeNumber.toShort
+    optional(seasonNumber).map(_.toInt),
+    optional(episodeNumber).map(_.toInt)
   )
 
   def mapToRating(input: Map[String, String]): Option[Rating] = for {

@@ -54,8 +54,8 @@ class RawSourcesSpec extends AsyncFunSpec with Matchers {
       val expectedEpisode = Episode(
         "tt0041951",
         "tt0041038",
-        1,
-        9
+        Some(1),
+        Some(9)
       )
       RawSources.episodesSource
         .take(1)

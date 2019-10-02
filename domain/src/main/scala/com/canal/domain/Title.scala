@@ -8,6 +8,6 @@ case class Title(
   isAdult: Boolean,
   startYear: Option[Short],
   endYear: Option[Short],
-  runtimeMinutes: Option[Short],
+  runtimeMinutes: Option[Int],
   genres: Vector[String]
 )

@@ -12,10 +12,10 @@ object TitleType {
     val id: String = "short"
   }
   case object Series extends TitleType {
-    val id: String = "tvseries"
+    val id: String = "tvSeries"
   }
   case object Episode extends TitleType {
-    val id: String = "tvepisode"
+    val id: String = "tvEpisode"
   }
   case object Video extends TitleType {
     val id: String = "video"
