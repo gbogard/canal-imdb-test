@@ -1,4 +1,4 @@
-package com.canal.datapipelines
+package com.canal.populator.data
 
 import com.canal.domain._
 
@@ -34,14 +34,12 @@ object Parsers {
       birthYear <- input.get("birthYear")
       deathYear <- input.get("deathYear")
       primaryProfession <- input.get("primaryProfession").map(vector)
-      titlesIds <- input.get("knownForTitles").map(vector)
     } yield Person(
       id,
       primaryName,
       optional(birthYear).map(_.toShort),
       optional(deathYear).map(_.toShort),
       primaryProfession,
-      titlesIds
     )
 
   def mapToPincipal(input: Map[String, String]): Option[Principal] =

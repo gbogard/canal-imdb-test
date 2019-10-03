@@ -1,30 +1,48 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.12.10"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.canal"
+ThisBuild / scalaVersion := "2.12.10"
+ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / organization := "com.canal"
 ThisBuild / organizationName := "Canal+"
-
 ThisBuild / resolvers += Resolver.sonatypeRepo("releases")
+
+val kindProjector = addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 
 lazy val root = (project in file("."))
   .settings(name := "Canal+ Test")
-  .aggregate(dataPipelines, httpApi)
+  .aggregate(databasePopulator, httpApi)
 
 lazy val domain = (project in file("domain"))
-  .settings(name :=  "domain")
 
-lazy val dataPipelines = (project in file("data-pipelines"))
-  .settings(name := "Data pipelines")
-  .settings(libraryDependencies ++= Seq(akkaStreams, alpakkaCsv, scalaTest % "test"))
-  .settings(addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3"))
+lazy val databaseInfrastructure = (project in file("database-infrastructure"))
+  .settings(libraryDependencies ++= Seq(akkaStreams, doobie, doobieHikari, sqlite))
   .dependsOn(domain)
 
 lazy val httpApi = (project in file("http-api"))
   .settings(name := "Http API")
-  .settings(libraryDependencies ++= Seq(akkaStreams, akkaHttp, scalaTest % "test"))
-  .dependsOn(domain, dataPipelines)
+  .settings(kindProjector)
+  .settings(
+    libraryDependencies ++= Seq(akkaStreams, akkaHttp, scalaTest % "test") ++ circe
+  )
+  .dependsOn(domain, databaseInfrastructure)
+
+lazy val databasePopulator = (project in file("database-populator"))
+  .settings(
+    libraryDependencies ++= Seq(
+      akkaStreams,
+      alpakkaCsv, 
+      scalaTest % "test"
+    )
+  )
+  .settings(kindProjector)
+  .dependsOn(domain, databaseInfrastructure)
+
 
 lazy val benchmarks = (project in file("benchmarks"))
   .settings(name := "Benchmarks")
-  .dependsOn(domain, dataPipelines)
+  .settings(
+    libraryDependencies += scalaMeter,
+    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
+    parallelExecution in Test := false
+  )
+  .dependsOn(domain, databaseInfrastructure)

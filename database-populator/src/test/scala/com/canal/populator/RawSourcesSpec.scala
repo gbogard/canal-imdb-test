@@ -1,9 +1,10 @@
-package com.canal.datapipelines
+package com.canal.populator
 
-import org.scalatest._
-import com.canal.domain._
-import com.canal.datapipelines.Materializer._
 import akka.stream.scaladsl._
+import com.canal.domain._
+import com.canal.populator.Materializer._
+import com.canal.populator.data.RawSources
+import org.scalatest._
 
 /**
   * These basic tests ensure the parsers work properly
@@ -39,7 +40,6 @@ class RawSourcesSpec extends AsyncFunSpec with Matchers {
         Some(1899),
         Some(1987),
         Vector("soundtrack", "actor", "miscellaneous"),
-        Vector("tt0053137", "tt0050419", "tt0072308", "tt0043044")
       )
 
       RawSources.peopleSource

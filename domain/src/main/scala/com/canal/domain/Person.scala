@@ -6,5 +6,4 @@ case class Person(
   birthYear: Option[Short],
   deathYear: Option[Short],
   primaryProfession: Vector[String],
-  titlesIds: Vector[String]
 )

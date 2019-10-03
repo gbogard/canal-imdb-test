@@ -4,3 +4,4 @@
 .vscode
 target
 *.tsv
+canal.db
