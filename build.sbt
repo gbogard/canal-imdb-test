@@ -22,6 +22,8 @@ lazy val httpApi = (project in file("http-api"))
   .settings(name := "Http API")
   .settings(kindProjector)
   .settings(
+    assemblyJarName in assembly := "assembly.jar",
+    test in assembly := {},
     libraryDependencies ++= Seq(akkaStreams, akkaHttp, scalaTest % "test") ++ circe
   )
   .dependsOn(domain, databaseInfrastructure)
