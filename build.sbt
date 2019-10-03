@@ -36,13 +36,3 @@ lazy val databasePopulator = (project in file("database-populator"))
   )
   .settings(kindProjector)
   .dependsOn(domain, databaseInfrastructure)
-
-
-lazy val benchmarks = (project in file("benchmarks"))
-  .settings(name := "Benchmarks")
-  .settings(
-    libraryDependencies += scalaMeter,
-    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
-    parallelExecution in Test := false
-  )
-  .dependsOn(domain, databaseInfrastructure)
