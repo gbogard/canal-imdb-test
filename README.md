@@ -103,3 +103,8 @@ The database population process will take at least 10 minutes and the database f
 sbt httpAPi/run
 ```
 
+## Run the tests
+
+```
+sbt test
+```
